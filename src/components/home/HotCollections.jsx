@@ -49,7 +49,15 @@ const HotCollections = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        Loading...
+        <Skeleton width={"100%"} height={200} />
+        <Skeleton width={50} height={50} borderRadius={"50%"} />
+        <Skeleton width={"100px"} height={27} />
+        <Skeleton width={"70px"} height={27} />
+      </div>
+    );
   }
 
   if (error) {
@@ -79,43 +87,46 @@ const HotCollections = () => {
           </button>
 
           {/* Keen Slider */}
+
           <div ref={sliderRef} className="keen-slider">
-            {hotcollection.map((hotColl) => (
-              <div
-                className="keen-slider__slide col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                key={hotColl.authorId}
-                style={{ padding: 0 }}
-              >
-                <div className="nft_coll">
-                  <div className="nft_wrap">
-                    <Link to="/item-details">
-                      <img
-                        src={hotColl.nftImage}
-                        className="lazy img-fluid"
-                        alt={hotColl.authorImage}
-                        style={{ height: "100%", width: "100%" }}
-                      />
-                    </Link>
+            {isLoading
+              ? Array()
+              : hotcollection.map((hotColl) => (
+                  <div
+                    className="keen-slider__slide col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                    key={hotColl.authorId}
+                    style={{ padding: 0 }}
+                  >
+                    <div className="nft_coll">
+                      <div className="nft_wrap">
+                        <Link to="/item-details">
+                          <img
+                            src={hotColl.nftImage}
+                            className="lazy img-fluid"
+                            alt={hotColl.authorImage}
+                            style={{ height: "100%", width: "100%" }}
+                          />
+                        </Link>
+                      </div>
+                      <div className="nft_coll_pp">
+                        <Link to="/author">
+                          <img
+                            className="lazy pp-coll"
+                            src={hotColl.authorImage}
+                            alt=""
+                          />
+                        </Link>
+                        <i className="fa fa-check"></i>
+                      </div>
+                      <div className="nft_coll_info">
+                        <Link to="/explore">
+                          <h4>{hotColl.title}</h4>
+                        </Link>
+                        <span>ERC-{hotColl.code}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="nft_coll_pp">
-                    <Link to="/author">
-                      <img
-                        className="lazy pp-coll"
-                        src={hotColl.authorImage}
-                        alt=""
-                      />
-                    </Link>
-                    <i className="fa fa-check"></i>
-                  </div>
-                  <div className="nft_coll_info">
-                    <Link to="/explore">
-                      <h4>{hotColl.title}</h4>
-                    </Link>
-                    <span>ERC-{hotColl.code}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                ))}
           </div>
 
           {/* Right Arrow */}
