@@ -92,7 +92,8 @@ const HotCollections = () => {
                       <img
                         src={hotColl.nftImage}
                         className="lazy img-fluid"
-                        alt=""
+                        alt={hotColl.authorImage}
+                        style={{ height: "100%" }}
                       />
                     </Link>
                   </div>
